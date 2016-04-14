@@ -1,0 +1,15 @@
+{
+  "name": "happymeowr",
+  "version": "1.0.0",
+  "description": "This cheeky cat will help you decide where to find trouble.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "moby": "^1.1.1",
+    "node-wit": "^3.0.1"
+  }
+}
