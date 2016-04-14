@@ -16,6 +16,7 @@ const actions = {
     cb();
   },
   merge: (context, entities, cb) => {
+    console.log( context, entities );
     cb(context);
   },
   error: (sessionid, msg) => {
@@ -23,7 +24,6 @@ const actions = {
   },
   'find-venue': (context, cb ) => {
     console.log( context );
-    console.log( cb );
     cb(context);
 
   }
