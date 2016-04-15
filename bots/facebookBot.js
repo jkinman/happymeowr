@@ -19,24 +19,24 @@ exports.dealWithMessage = (req, res) => {
   var messaging_events = req.body.entry[0].messaging;
   if( messaging_events ){
 
-  for (var i = 0; i < messaging_events.length; i++) {
-    var event = messaging_events.messaging[i];
-    var sender = event.sender.id;
-    console.log( event );
-    console.log( '--------------------------------------' );
-    console.log( event.sender );
+    for (var i = 0; i < messaging_events.messaging.length; i++) {
+      var event = messaging_events.messaging[i];
+      var sender = event.sender.id;
+      console.log( event );
+      console.log( '--------------------------------------' );
+      console.log( event.sender );
 
-    if (event.message && event.message.text) {
-      var text = event.message.text;
-      wit.message( text, (error, data) => {
-        if (error) {
-          console.log('Oops! Got an error: ' + error);
-        } else {
-          console.log('Yay, got Wit.ai response: ' + JSON.stringify(data));
-        }
-      });
+      if (event.message && event.message.text) {
+        var text = event.message.text;
+        wit.message( text, (error, data) => {
+          if (error) {
+            console.log('Oops! Got an error: ' + error);
+          } else {
+            console.log('Yay, got Wit.ai response: ' + JSON.stringify(data));
+          }
+        });
+      }
     }
-  }
   }
 
   res.sendStatus(200);
