@@ -41,10 +41,10 @@ exports.dealWithMessage = (req, res) => {
             if( entities ){
               var intent = entities.intent.value;
               switch( intent ){
-                'drugs':
+                case 'drugs':
                   sendTextMessage( sender, `Only cat nap for me bro.` );
                   break;
-                'coffee':
+                case 'coffee':
                   sendTextMessage( sender, `Ewwww, cats, hate ${intent}.` );
                   break;
                 default:
