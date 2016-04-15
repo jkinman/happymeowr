@@ -49,7 +49,7 @@ var sendTextMessage = (sender, text) => {
   var messageData = {
     text:text
   }
-  var request({
+  request({
     url: 'https://graph.facebook.com/v2.6/me/messages',
     qs: {access_token:token},
     method: 'POST',
