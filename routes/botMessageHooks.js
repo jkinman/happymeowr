@@ -6,7 +6,7 @@ router.get('/fbbot', function(req, res, next) {
   if (req.query['hub.verify_token'] === 'i_fell_asleep_on_my_keyboard') {
       res.send(req.query['hub.challenge']);
     }
-    res.send('Error, wrong validation token');
+    res.send(req.query);
 });
 
 router.get('/slackbot', function(req, res, next) {
