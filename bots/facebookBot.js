@@ -32,54 +32,50 @@ exports.dealWithMessage = (req, res) => {
           if (error) {
             console.log('Oops! Got an error: ' + error);
           } else {
-            console.log( data );
-            // sendTextMessage( sender, 'Sorry im changing my litterbox...')
             
-              var entities = obj.outcomes.entities;
+            console.log( JSON.stringify(data) );
+
+            var entities = obj.outcomes.entities;
             if( entities ){
               var intent = entities.intent.value;
               switch( intent ){
                 case 'drugs':
-                  sendTextMessage( sender, `Only cat nap for me bro.` );
-                  break;
+                sendTextMessage( sender, `Only cat nap for me bro.` );
+                break;
 
                 case 'coffee':
-                  sendTextMessage( sender, `Ewwww, cats, hate ${intent}.` );
-                  break;
+                sendTextMessage( sender, `Ewwww, cats, hate ${intent}.` );
+                break;
 
                 default:
-                  sendTextMessage( sender, `ok... ${intent}. ` );
-                  break;
-                  yelp.search({
-                    term: intent,
-                    location: 'Vancouver canada',
-                    limit: 20,
-                    sort: 0,
-                    radius_filter: 2000
-                  })
-                  .then(function ( data ) {
-                    //get a random selection
-                    let spots = data.businesses;
-                    var randBusiness = spots[Math.floor(Math.random() * spots.length)];
-                    var venueName = `${randBusiness.name} ${randBusiness.rating} stars`;
-                    sendTextMessage( sender, venueName );
-                  });
+                sendTextMessage( sender, `ok... ${intent}. ` );
+                break;
+                yelp.search({
+                  term: intent,
+                  location: 'Vancouver canada',
+                  limit: 20,
+                  sort: 0,
+                  radius_filter: 2000
+                })
+                .then(function ( data ) {
+                  //get a random selection
+                  let spots = data.businesses;
+                  var randBusiness = spots[Math.floor(Math.random() * spots.length)];
+                  var venueName = `${randBusiness.name} ${randBusiness.rating} stars`;
+                  sendTextMessage( sender, venueName );
+                });
               }
             }
             else{
               sendTextMessage( sender, `zzzzzzzzzzzzzzzzz...` );
             }
 
-
-
-
-            } );
-            console.log('Yay, got Wit.ai response: ' + JSON.stringify(data));
-          }
-        });
-      }
+          } );
+        }
+      });
     }
   }
+}
 
 var token = 'CAAOSawHNHskBAK9iUpZBQNfk261LG5ZBjzKQMrAanXUR1PH6TpQu3T67o6RPFZAEiv0k2buX62UztXHe39AvQLlOII0m8SDgvvwaLYd7omeORdMYK6BAOcdPEhZAJ3xLoAmrZBT7b7rXlZB9JsdyKRx7JfAhWvwxugGJV3TXbf8r9diAZBEBZBfsmoQkxdlCamEZD';
 
@@ -103,7 +99,7 @@ var sendTextMessage = (sender, text) => {
     }
   });
 }
-  res.sendStatus(200);
+res.sendStatus(200);
 }
 
 // This will contain all user sessions.
@@ -132,21 +128,21 @@ const findOrCreateSession = (fbid) => {
 // https://developers.facebook.com/docs/messenger-platform/webhook-reference
 const getFirstMessagingEntry = (body) => {
   const val = body.object == 'page' &&
-    body.entry &&
-    Array.isArray(body.entry) &&
-    body.entry.length > 0 &&
-    body.entry[0] &&
-    body.entry[0].id == FB_PAGE_ID &&
-    body.entry[0].messaging &&
-    Array.isArray(body.entry[0].messaging) &&
-    body.entry[0].messaging.length > 0 &&
-    body.entry[0].messaging[0]
+  body.entry &&
+  Array.isArray(body.entry) &&
+  body.entry.length > 0 &&
+  body.entry[0] &&
+  body.entry[0].id == FB_PAGE_ID &&
+  body.entry[0].messaging &&
+  Array.isArray(body.entry[0].messaging) &&
+  body.entry[0].messaging.length > 0 &&
+  body.entry[0].messaging[0]
   ;
   return val || null;
 };
 
-  var parseMessage = ( obj, cb ) => {
-    var entities = obj.outcomes.entities;
+var parseMessage = ( obj, cb ) => {
+  var entities = obj.outcomes.entities;
   if( entities ){
     var intent = entities.intent.value;
     var message;
