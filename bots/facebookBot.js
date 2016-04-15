@@ -4,6 +4,7 @@ var express = require('express');
 var app = express();
 var wit = require( './witbot' );
 var yelp = require( '../api/venueFinder.js' );
+const request = require('request');
 
 exports.verify = (req, res ) => {
   if (req.query['hub.verify_token'] === 'i_fell_asleep_on_my_keyboard') {
