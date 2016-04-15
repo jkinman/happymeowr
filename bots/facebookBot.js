@@ -45,7 +45,7 @@ exports.dealWithMessage = (req, res) => {
 var token = 'CAAOSawHNHskBAK9iUpZBQNfk261LG5ZBjzKQMrAanXUR1PH6TpQu3T67o6RPFZAEiv0k2buX62UztXHe39AvQLlOII0m8SDgvvwaLYd7omeORdMYK6BAOcdPEhZAJ3xLoAmrZBT7b7rXlZB9JsdyKRx7JfAhWvwxugGJV3TXbf8r9diAZBEBZBfsmoQkxdlCamEZD';
 
 var sendTextMessage = (sender, text) => {
-  messageData = {
+  var messageData = {
     text:text
   }
   request({
