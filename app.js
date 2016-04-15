@@ -11,15 +11,16 @@ var users = require('./routes/users');
 var app = express();
 
 const Wit = require('./node_modules/node-wit').Wit;
-const token = (() => {
-  if (process.argv.length !== 3) {
-    console.log('usage: node examples/template.js <wit-token>');
-    process.exit(1);
-  }
-  console.log( `wit bot starting with ${process.argv[2]}`)
-  return process.argv[2];
-})();
+// const token = (() => {
+//   if (process.argv.length !== 3) {
+//     console.log('usage: node examples/template.js <wit-token>');
+//     process.exit(1);
+//   }
+//   console.log( `wit bot starting with ${process.argv[2]}`)
+//   return process.argv[2];
+// })();
 
+const token = 'QHVCRJPE3NXCNNNJQMP3DXI74I4KPVTF';
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

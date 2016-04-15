@@ -4,8 +4,7 @@
   "description": "This cheeky cat will help you decide where to find trouble.",
   "main": "app.js",
   "scripts": {
-    "start": "app.js QHVCRJPE3NXCNNNJQMP3DXI74I4KPVTF",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js"
   },
   "author": "",
   "license": "ISC",
