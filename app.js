@@ -78,7 +78,10 @@ console.log( `loaded routes` );
 // });
 
 // Start server
-var port = app.get('PORT') || 3000;
+// set the port of our application
+// process.env.PORT lets the port be set by Heroku
+var port = process.env.PORT || 8080;
+
 app.listen( port, function() {
 	console.log('Express server listening on %d', port );
 });
