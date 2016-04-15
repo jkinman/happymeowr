@@ -9,7 +9,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "botkit": "^0.1.0",
     "moby": "^1.1.1",
-    "node-wit": "^3.0.1"
+    "node-wit": "^3.0.1",
+    "suncalc": "^1.7.0",
+    "weather": "^0.1.0",
+    "yelp": "^1.0.1"
   }
 }
