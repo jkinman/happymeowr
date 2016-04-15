@@ -32,10 +32,45 @@ exports.dealWithMessage = (req, res) => {
           if (error) {
             console.log('Oops! Got an error: ' + error);
           } else {
-              sendTextMessage( sender, 'Sorry im changing my litterbox 💩💩💩 ')
-            // var reply = wit.parseMessage( data, ( message ) => {
-            //   sendTextMessage( sender, message );
-            // } );
+            // sendTextMessage( sender, 'Sorry im changing my litterbox...')
+            var reply = wit.parseMessage( data, ( message ) => {
+
+
+
+              var entities = obj.outcomes.entities;
+            if( entities ){
+              var intent = entities.intent.value;
+              switch( intent ){
+                'drugs':
+                  sendTextMessage( sender, `Only cat nap for me bro.` );
+                  break;
+                'coffee':
+                  sendTextMessage( sender, `Ewwww, cats, hate ${intent}.` );
+                  break;
+                default:
+                  sendTextMessage( sender, `ok... ${intent}. ` );
+                  break;
+                  yelp.search({
+                    term: intent,
+                    location: 'Vancouver canada',
+                    limit: 20,
+                    sort: 0,
+                    radius_filter: 2000
+                  })
+                  .then(function ( data ) {
+                    //get a random selection
+                    let spots = data.businesses;
+                    var randBusiness = spots[Math.floor(Math.random() * spots.length)];
+                    var venueName = `${randBusiness.name} ${randBusiness.rating} stars`;
+                    sendTextMessage( sender, venueName );
+                  });
+              }
+            }
+
+
+
+
+            } );
             console.log('Yay, got Wit.ai response: ' + JSON.stringify(data));
           }
         });
@@ -65,8 +100,6 @@ var sendTextMessage = (sender, text) => {
     }
   });
 }
-
-
   res.sendStatus(200);
 }
 
@@ -109,11 +142,14 @@ const getFirstMessagingEntry = (body) => {
   return val || null;
 };
 
-exports.parseMessage = ( obj, cb ) => {
-  var entities = obj.outcomes.entities;
+  var parseMessage = ( obj, cb ) => {
+    var entities = obj.outcomes.entities;
   if( entities ){
-
     var intent = entities.intent.value;
+    var message;
+    switch( intent ){
+      'coffee': message = `Ewwww, cats, hate ${intent}.`
+    }
     yelp.search({
       term: intent,
       location: 'Vancouver canada',
