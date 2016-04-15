@@ -32,7 +32,7 @@ exports.dealWithMessage = (req, res) => {
           if (error) {
             console.log('Oops! Got an error: ' + error);
           } else {
-            
+
             console.log( JSON.stringify(data) );
 
             var entities = obj.outcomes.entities;
@@ -70,36 +70,35 @@ exports.dealWithMessage = (req, res) => {
               sendTextMessage( sender, `zzzzzzzzzzzzzzzzz...` );
             }
 
-          } );
-        }
-      });
+          }
+        });
+      }
     }
   }
-}
 
-var token = 'CAAOSawHNHskBAK9iUpZBQNfk261LG5ZBjzKQMrAanXUR1PH6TpQu3T67o6RPFZAEiv0k2buX62UztXHe39AvQLlOII0m8SDgvvwaLYd7omeORdMYK6BAOcdPEhZAJ3xLoAmrZBT7b7rXlZB9JsdyKRx7JfAhWvwxugGJV3TXbf8r9diAZBEBZBfsmoQkxdlCamEZD';
+  var token = 'CAAOSawHNHskBAK9iUpZBQNfk261LG5ZBjzKQMrAanXUR1PH6TpQu3T67o6RPFZAEiv0k2buX62UztXHe39AvQLlOII0m8SDgvvwaLYd7omeORdMYK6BAOcdPEhZAJ3xLoAmrZBT7b7rXlZB9JsdyKRx7JfAhWvwxugGJV3TXbf8r9diAZBEBZBfsmoQkxdlCamEZD';
 
-var sendTextMessage = (sender, text) => {
-  var messageData = {
-    text:text
+  var sendTextMessage = (sender, text) => {
+    var messageData = {
+      text:text
+    }
+    request({
+      url: 'https://graph.facebook.com/v2.6/me/messages',
+      qs: {access_token:token},
+      method: 'POST',
+      json: {
+        recipient: {id:sender},
+        message: messageData,
+      }
+    }, function(error, response, body) {
+      if (error) {
+        console.log('Error sending message: ', error);
+      } else if (response.body.error) {
+        console.log('Error: ', response.body.error);
+      }
+    });
   }
-  request({
-    url: 'https://graph.facebook.com/v2.6/me/messages',
-    qs: {access_token:token},
-    method: 'POST',
-    json: {
-      recipient: {id:sender},
-      message: messageData,
-    }
-  }, function(error, response, body) {
-    if (error) {
-      console.log('Error sending message: ', error);
-    } else if (response.body.error) {
-      console.log('Error: ', response.body.error);
-    }
-  });
-}
-res.sendStatus(200);
+  res.sendStatus(200);
 }
 
 // This will contain all user sessions.
