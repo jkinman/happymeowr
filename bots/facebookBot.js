@@ -19,8 +19,8 @@ exports.dealWithMessage = (req, res) => {
   var messaging_events = req.body.entry[0].messaging;
   if( messaging_events ){
 
-    for (var i = 0; i < messaging_events.messaging.length; i++) {
-      var event = messaging_events.messaging[i];
+    for (var i = 0; i < messaging_events.length; i++) {
+      var event = messaging_events[i];
       var sender = event.sender.id;
       console.log( event );
       console.log( '--------------------------------------' );
