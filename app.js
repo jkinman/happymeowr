@@ -78,8 +78,8 @@ console.log( `loaded routes` );
 // });
 
 // Start server
-server.listen( 8080, function() {
-	console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
+app.listen( 8080, function() {
+	console.log('Express server listening on %d', 8080 );
 });
 
 module.exports = app;
