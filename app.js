@@ -4,6 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var Botkit = require('Botkit');
+var os = require('os');
 
 // routes
 var routes = require('./routes/index');
@@ -11,13 +13,8 @@ var users = require('./routes/users');
 var bots = require('./routes/botMessageHooks');
 
 var app = express();
-console.log( `express started` );
-
-const Wit = require('./node_modules/node-wit').Wit;
-console.log( `wit imported` );
 
 var port = process.env.PORT || 8080;
-const token = process.env.wit_bot_token || 'QHVCRJPE3NXCNNNJQMP3DXI74I4KPVTF';
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

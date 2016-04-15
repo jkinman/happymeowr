@@ -1,6 +1,7 @@
 'use strict';
 
-
+const token = process.env.wit_bot_token || 'QHVCRJPE3NXCNNNJQMP3DXI74I4KPVTF';
+const Wit = require('node-wit').Wit;
 var Yelp = require('yelp');
 
 var yelp = new Yelp({
@@ -69,6 +70,7 @@ const actions = {
 };
 
 const client = new Wit(token, actions);
+
 // client.interactive();
 
 // client.message('where can I get drunk with a big group of friends tonight?', (error, data) => {
@@ -78,3 +80,4 @@ const client = new Wit(token, actions);
 //     console.log('Yay, got Wit.ai response: ' + JSON.stringify(data));
 //   }
 // });
+module.exports = client;

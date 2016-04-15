@@ -1,21 +1,17 @@
 var express = require('express');
 var router = express.Router();
+var fbController = require( '../bots/facebookBot' );
+// var slackController = require( '../bots/slackBot' );
 
 /* GET users listing. */
-router.get('/fbbot', function(req, res, next) {
-  if (req.query['hub.verify_token'] === 'i_fell_asleep_on_my_keyboard') {
-      res.send(req.query['hub.challenge']);
-    }
-    res.send(req.query);
-});
+router.get('/fbbot', fbController.verify);
 
-router.get('/slackbot', function(req, res, next) {
-  res.send('respond with a resource');
-});
+// router.get('/slackbot', slackBot.message );
 
 router.get('/kikbot', function(req, res, next) {
   res.send('respond with a resource');
 });
+
 
 
 module.exports = router;
