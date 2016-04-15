@@ -15,15 +15,19 @@ exports.verify = (req, res ) => {
 };
 
 exports.dealWithMessage = (req, res) => {
-  console.log( req.body.entry[0] );
+  // console.log( req.body.entry[0] );
   var messaging_events = req.body.entry[0].messaging;
   if( messaging_events ){
 
   for (var i = 0; i < messaging_events.length; i++) {
-    event = req.body.entry[0].messaging[i];
-    sender = event.sender.id;
+    var event = messaging_events.messaging[i];
+    var sender = event.sender.id;
+    console.log( event );
+    console.log( '--------------------------------------' );
+    console.log( event.sender );
+
     if (event.message && event.message.text) {
-      text = event.message.text;
+      var text = event.message.text;
       wit.message( text, (error, data) => {
         if (error) {
           console.log('Oops! Got an error: ' + error);
