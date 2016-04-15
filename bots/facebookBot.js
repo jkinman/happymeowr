@@ -15,7 +15,8 @@ exports.verify = (req, res ) => {
 };
 
 exports.dealWithMessage = (req, res) => {
-  messaging_events = req.body.entry[0].messaging;
+  console.log( req.body.entry[0] );
+  var messaging_events = req.body.entry[0].messaging;
 
   for (i = 0; i < messaging_events.length; i++) {
     event = req.body.entry[0].messaging[i];
