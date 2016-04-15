@@ -32,9 +32,10 @@ exports.dealWithMessage = (req, res) => {
           if (error) {
             console.log('Oops! Got an error: ' + error);
           } else {
-            var reply = wit.parseMessage( data, ( message ) => {
-              sendTextMessage( sender, message );
-            } );
+              sendTextMessage( sender, 'Sorry im changing my litterbox...')
+            // var reply = wit.parseMessage( data, ( message ) => {
+            //   sendTextMessage( sender, message );
+            // } );
             console.log('Yay, got Wit.ai response: ' + JSON.stringify(data));
           }
         });
