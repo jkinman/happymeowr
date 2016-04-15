@@ -9,8 +9,11 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+console.log( `express started` );
 
 const Wit = require('./node_modules/node-wit').Wit;
+console.log( `wit imported` );
+
 // const token = (() => {
 //   if (process.argv.length !== 3) {
 //     console.log('usage: node examples/template.js <wit-token>');
@@ -26,7 +29,6 @@ const token = 'QHVCRJPE3NXCNNNJQMP3DXI74I4KPVTF';
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-// uncomment after placing your favicon in /public
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -49,6 +51,8 @@ app.use(function(req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
+  console.log( `found env=development` );
+
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error', {
