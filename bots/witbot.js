@@ -43,7 +43,7 @@ const actions = {
     console.log('Oops, I don\'t know what to do.');
   },
 
-  'find-venue': (context, cb ) => {
+  'find-venue': (sessionId, context, cb ) => {
 
     yelp.search({
       term: context.intent,
