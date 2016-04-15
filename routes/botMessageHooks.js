@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/fbbot', function(req, res, next) {
-  res.send('respond with a resource');
+  res.send('518817861');
 });
 
 router.get('/slackbot', function(req, res, next) {
