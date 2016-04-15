@@ -8,7 +8,7 @@ var app = express();
 var exports = module.exports = {};
 
 exports.verify = (req, res ) => {
-  if (req.query['hub.verify_token'] === 'my_token_here') {
+  if (req.query['hub.verify_token'] === 'i_fell_asleep_on_my_keyboard') {
     res.send(req.query['hub.challenge']);
   }
   res.send('Error, wrong validation token');
@@ -17,8 +17,9 @@ exports.verify = (req, res ) => {
 exports.dealWithMessage = (req, res) => {
   console.log( req.body.entry[0] );
   var messaging_events = req.body.entry[0].messaging;
+  if( messaging_events ){
 
-  for (i = 0; i < messaging_events.length; i++) {
+  for (var i = 0; i < messaging_events.length; i++) {
     event = req.body.entry[0].messaging[i];
     sender = event.sender.id;
     if (event.message && event.message.text) {
@@ -32,5 +33,7 @@ exports.dealWithMessage = (req, res) => {
       });
     }
   }
+  }
+
   res.sendStatus(200);
 }

@@ -3,7 +3,6 @@ var router = express.Router();
 var fbController = require( '../bots/facebookBot' );
 // var slackController = require( '../bots/slackBot' );
 
-/* GET users listing. */
 router.get( '/fbbot', fbController.verify );
 router.post( '/fbbot', fbController.dealWithMessage );
 
