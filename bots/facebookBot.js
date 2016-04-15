@@ -1,11 +1,9 @@
 'use strict';
-var express = require('express');
-var wit = require( './witbot' );
-
-
-var app = express();
-
 var exports = module.exports = {};
+var express = require('express');
+var app = express();
+var wit = require( './witbot' );
+var yelp = require( '../api/venueFinder.js' );
 
 exports.verify = (req, res ) => {
   if (req.query['hub.verify_token'] === 'i_fell_asleep_on_my_keyboard') {
@@ -13,6 +11,7 @@ exports.verify = (req, res ) => {
   }
   res.send('Error, wrong validation token');
 };
+
 
 exports.dealWithMessage = (req, res) => {
   // console.log( req.body.entry[0] );
@@ -70,27 +69,44 @@ var sendTextMessage = (sender, text) => {
   res.sendStatus(200);
 }
 
+// This will contain all user sessions.
+// Each session has an entry:
+// sessionId -> {fbid: facebookUserId, context: sessionState}
+const sessions = {};
 
+const findOrCreateSession = (fbid) => {
+  let sessionId;
+  // Let's see if we already have a session for the user fbid
+  Object.keys(sessions).forEach(k => {
+    if (sessions[k].fbid === fbid) {
+      // Yep, got it!
+      sessionId = k;
+    }
+  });
+  if (!sessionId) {
+    // No session found for user fbid, let's create a new one
+    sessionId = new Date().toISOString();
+    sessions[sessionId] = {fbid: fbid, context: {}};
+  }
+  return sessionId;
+};
 
-var Yelp = require('yelp');
-
-var yelp = new Yelp({
-  consumer_key: 'Xl-Fu3VgSH347wuaGudkPA',
-  consumer_secret: '_Z-eP5uOy2b1c2cc0l5LyaW_IHU',
-  token: 'NMLuRkyVpNOz4Ydcqsoky7wmao9H08qe',
-  token_secret: '7YHP0BPxvRR3XSqRSsBK4eMTS7k',
-});
-
-
-// {
-//   "msg_id":"f67a3859-2b43-46e7-8ad0-499141aa4e84",
-//   "_text":"Where is a good patio?",
-//   "outcomes":[{
-//     "_text":"Where is a good patio?",
-//     "confidence":null,
-//     "intent":"default_intent",
-//     "entities":{"intent":[
-//       {"type":"value","value":"patio"}]}}]}
+// See the Webhook reference
+// https://developers.facebook.com/docs/messenger-platform/webhook-reference
+const getFirstMessagingEntry = (body) => {
+  const val = body.object == 'page' &&
+    body.entry &&
+    Array.isArray(body.entry) &&
+    body.entry.length > 0 &&
+    body.entry[0] &&
+    body.entry[0].id == FB_PAGE_ID &&
+    body.entry[0].messaging &&
+    Array.isArray(body.entry[0].messaging) &&
+    body.entry[0].messaging.length > 0 &&
+    body.entry[0].messaging[0]
+  ;
+  return val || null;
+};
 
 parseMessage = ( obj, cb ) => {
   var entities = obj.outcomes.entities;
