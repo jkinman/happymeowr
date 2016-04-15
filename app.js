@@ -16,16 +16,8 @@ console.log( `express started` );
 const Wit = require('./node_modules/node-wit').Wit;
 console.log( `wit imported` );
 
-// const token = (() => {
-//   if (process.argv.length !== 3) {
-//     console.log('usage: node examples/template.js <wit-token>');
-//     process.exit(1);
-//   }
-//   console.log( `wit bot starting with ${process.argv[2]}`)
-//   return process.argv[2];
-// })();
-
-const token = 'QHVCRJPE3NXCNNNJQMP3DXI74I4KPVTF';
+var port = process.env.PORT || 8080;
+const token = process.env.wit_bot_token || 'QHVCRJPE3NXCNNNJQMP3DXI74I4KPVTF';
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -39,48 +31,14 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-
 // app.use('/users', users);
+app.use('/bots', bots);
+
 console.log( `loaded routes` );
-
-// catch 404 and forward to error handler
-// app.use(function(req, res, next) {
-//   var err = new Error('Not Found');
-//   err.status = 404;
-//   next(err);
-// });
-// console.log( `setup 404` );
-
-// error handlers
-
-// development error handler
-// will print stacktrace
-// if (app.get('env') === 'development') {
-//   console.log( `found env=development` );
-//
-//   app.use(function(err, req, res, next) {
-//     res.status(err.status || 500);
-//     res.render('error', {
-//       message: err.message,
-//       error: err
-//     });
-//   });
-// }
-//
-// // production error handler
-// // no stacktraces leaked to user
-// app.use(function(err, req, res, next) {
-//   res.status(err.status || 500);
-//   res.render('error', {
-//     message: err.message,
-//     error: {}
-//   });
-// });
 
 // Start server
 // set the port of our application
 // process.env.PORT lets the port be set by Heroku
-var port = process.env.PORT || 8080;
 
 app.listen( port, function() {
 	console.log('Express server listening on %d', port );
