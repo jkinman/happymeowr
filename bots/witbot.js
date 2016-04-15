@@ -29,21 +29,21 @@ const actions = {
     console.log(msg);
     cb();
   },
-  merge: (sessionId, context, entities, message, cb) => {
+  merge: ( context, entities, callback) => {
     // console.log( context, entities );
     const intent = firstEntityValue(entities, 'intent');
     if(intent) {
       context.intent = intent;
     }
 
-    cb(context);
+    // cb(context);
   },
 
   error: (sessionid, msg) => {
     console.log('Oops, I don\'t know what to do.');
   },
 
-  'find-venue': (sessionId, context, cb ) => {
+  'find-venue': ( context, cb ) => {
 
     yelp.search({
       term: context.intent,
@@ -98,7 +98,7 @@ client.parseMessage = ( obj, cb ) => {
     var randBusiness = spots[Math.floor(Math.random() * spots.length)];
     var venueName = `${randBusiness.name} ${randBusiness.rating} stars`;
     cb.call( this, venueName );
-  };
+  });
 };
 
 
