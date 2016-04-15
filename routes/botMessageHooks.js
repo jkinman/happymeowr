@@ -3,7 +3,10 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/fbbot', function(req, res, next) {
-  res.send('518817861');
+  if (req.query['hub.verify_token'] === 'my_token_here') {
+      res.send(req.query['hub.challenge']);
+    }
+    res.send('Error, wrong validation token');
 });
 
 router.get('/slackbot', function(req, res, next) {
