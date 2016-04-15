@@ -73,13 +73,34 @@ const actions = {
 
 const client = new Wit(token, actions);
 
-// client.interactive();
+// {
+//   "msg_id":"f67a3859-2b43-46e7-8ad0-499141aa4e84",
+//   "_text":"Where is a good patio?",
+//   "outcomes":[{
+//     "_text":"Where is a good patio?",
+//     "confidence":null,
+//     "intent":"default_intent",
+//     "entities":{"intent":[
+//       {"type":"value","value":"patio"}]}}]}
 
-// client.message('where can I get drunk with a big group of friends tonight?', (error, data) => {
-//   if (error) {
-//     console.log('Oops! Got an error: ' + error);
-//   } else {
-//     console.log('Yay, got Wit.ai response: ' + JSON.stringify(data));
-//   }
-// });
+client.parseMessage = ( obj, cb ) => {
+  yelp.search({
+    term: context.intent,
+    location: 'Vancouver canada',
+  limit: 20,
+  sort: 0,
+  radius_filter: 2000
+ })
+  .then(function (data) {
+    //get a random selection
+    let spots = data.businesses;
+    var randBusiness = spots[Math.floor(Math.random() * spots.length)];
+    var venueName = `${randBusiness.name} ${randBusiness.rating} stars`;
+    cb.call( venueName );
+  };
+};
+
+
+
+
 module.exports = client;
