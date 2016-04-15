@@ -29,21 +29,21 @@ const actions = {
     console.log(msg);
     cb();
   },
-  merge: ( context, entities, callback) => {
+  merge: (sessionId, context, entities, message, cb) => {
     // console.log( context, entities );
     const intent = firstEntityValue(entities, 'intent');
     if(intent) {
       context.intent = intent;
     }
 
-    // cb(context);
+    cb(context);
   },
 
   error: (sessionid, msg) => {
     console.log('Oops, I don\'t know what to do.');
   },
 
-  'find-venue': ( context, cb ) => {
+  'find-venue': (sessionId, context, cb ) => {
 
     yelp.search({
       term: context.intent,
