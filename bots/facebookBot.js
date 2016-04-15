@@ -44,9 +44,11 @@ exports.dealWithMessage = (req, res) => {
                 case 'drugs':
                   sendTextMessage( sender, `Only cat nap for me bro.` );
                   break;
+
                 case 'coffee':
                   sendTextMessage( sender, `Ewwww, cats, hate ${intent}.` );
                   break;
+
                 default:
                   sendTextMessage( sender, `ok... ${intent}. ` );
                   break;
@@ -150,9 +152,6 @@ const getFirstMessagingEntry = (body) => {
   if( entities ){
     var intent = entities.intent.value;
     var message;
-    switch( intent ){
-      'coffee': message = `Ewwww, cats, hate ${intent}.`
-    }
     yelp.search({
       term: intent,
       location: 'Vancouver canada',
