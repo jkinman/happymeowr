@@ -32,11 +32,9 @@ exports.dealWithMessage = (req, res) => {
           if (error) {
             console.log('Oops! Got an error: ' + error);
           } else {
+            console.log( data );
             // sendTextMessage( sender, 'Sorry im changing my litterbox...')
-            var reply = wit.parseMessage( data, ( message ) => {
-
-
-
+            
               var entities = obj.outcomes.entities;
             if( entities ){
               var intent = entities.intent.value;
