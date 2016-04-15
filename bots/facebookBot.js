@@ -108,7 +108,7 @@ const getFirstMessagingEntry = (body) => {
   return val || null;
 };
 
-parseMessage = ( obj, cb ) => {
+exports.parseMessage = ( obj, cb ) => {
   var entities = obj.outcomes.entities;
   if( entities ){
 
