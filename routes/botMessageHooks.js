@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/fbbot', function(req, res, next) {
-  if (req.query['hub.verify_token'] === 'my_token_here') {
+  if (req.query['hub.verify_token'] === 'i_fell_asleep_on_my_keyboard') {
       res.send(req.query['hub.challenge']);
     }
     res.send('Error, wrong validation token');
