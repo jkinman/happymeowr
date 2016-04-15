@@ -14,7 +14,7 @@ exports.verify = (req, res ) => {
   res.send('Error, wrong validation token');
 };
 
-app.post('/webhook/', function (req, res) {
+exports.dealWithMessage = (req, res) => {
   messaging_events = req.body.entry[0].messaging;
 
   for (i = 0; i < messaging_events.length; i++) {
@@ -32,4 +32,4 @@ app.post('/webhook/', function (req, res) {
     }
   }
   res.sendStatus(200);
-});
+}
