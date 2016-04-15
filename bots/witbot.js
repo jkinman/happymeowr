@@ -13,9 +13,9 @@ var yelp = new Yelp({
 
 const firstEntityValue = (entities, entity) => {
   const val = entities && entities[entity] &&
-    Array.isArray(entities[entity]) &&
-    entities[entity].length > 0 &&
-    entities[entity][0].value
+  Array.isArray(entities[entity]) &&
+  entities[entity].length > 0 &&
+  entities[entity][0].value
   ;
   if (!val) {
     return null;
@@ -32,9 +32,9 @@ const actions = {
   merge: (sessionId, context, entities, message, cb) => {
     // console.log( context, entities );
     const intent = firstEntityValue(entities, 'intent');
-     if(intent) {
-       context.intent = intent;
-     }
+    if(intent) {
+      context.intent = intent;
+    }
 
     cb(context);
   },
@@ -48,10 +48,10 @@ const actions = {
     yelp.search({
       term: context.intent,
       location: 'Vancouver canada',
-    limit: 20,
-    sort: 0,
-    radius_filter: 2000
-   })
+      limit: 20,
+      sort: 0,
+      radius_filter: 2000
+    })
     .then(function (data) {
       //get a random selection
       let spots = data.businesses;
@@ -84,19 +84,20 @@ const client = new Wit(token, actions);
 //       {"type":"value","value":"patio"}]}}]}
 
 client.parseMessage = ( obj, cb ) => {
+  var intent = obj['outcomes']['entities']['intent']['value'];
   yelp.search({
-    term: context.intent,
+    term: intent,
     location: 'Vancouver canada',
-  limit: 20,
-  sort: 0,
-  radius_filter: 2000
- })
-  .then(function (data) {
+    limit: 20,
+    sort: 0,
+    radius_filter: 2000
+  })
+  .then(function ( data ) {
     //get a random selection
     let spots = data.businesses;
     var randBusiness = spots[Math.floor(Math.random() * spots.length)];
     var venueName = `${randBusiness.name} ${randBusiness.rating} stars`;
-    cb.call( venueName );
+    cb.call( this, venueName );
   };
 };
 
