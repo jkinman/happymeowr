@@ -29,7 +29,7 @@ const actions = {
     console.log(msg);
     cb();
   },
-  merge: (context, entities, cb) => {
+  merge: (sessionId, context, entities, message, cb) => {
     // console.log( context, entities );
     const intent = firstEntityValue(entities, 'intent');
      if(intent) {
@@ -38,9 +38,11 @@ const actions = {
 
     cb(context);
   },
+
   error: (sessionid, msg) => {
     console.log('Oops, I don\'t know what to do.');
   },
+
   'find-venue': (context, cb ) => {
 
     yelp.search({
