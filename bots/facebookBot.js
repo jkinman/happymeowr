@@ -66,6 +66,9 @@ exports.dealWithMessage = (req, res) => {
                   });
               }
             }
+            else{
+              sendTextMessage( sender, `zzzzzzzzzzzzzzzzz...` );
+            }
 
 
 
