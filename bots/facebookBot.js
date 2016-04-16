@@ -32,10 +32,14 @@ exports.dealWithMessage = (req, res) => {
           if (error) {
             console.log('Oops! Got an error: ' + error);
           } else {
-
+// {
+//   "msg_id":"ac38d298-e19d-49ea-86d2-ab3ca9a6fca4",
+//   "_text":"How about now?",
+//   "outcomes":[{"_text":"How about now?","confidence":null,
+//   "intent":"default_intent","entities":{"datetime":[{"type":"value","value":"2016-04-15T16:59:06.000-07:00","grain":"second","values":[{"type":"value","value":"2016-04-15T16:59:06.000-07:00","grain":"second"}]}]}}]}
             console.log( JSON.stringify(data) );
 
-            var entities = obj.outcomes.entities;
+            var entities = data.outcomes.entities;
             if( entities ){
               var intent = entities.intent.value;
               switch( intent ){
