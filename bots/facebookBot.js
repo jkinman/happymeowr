@@ -39,17 +39,28 @@ exports.dealWithMessage = (req, res) => {
 //   "intent":"default_intent","entities":{"datetime":[{"type":"value","value":"2016-04-15T16:59:06.000-07:00","grain":"second","values":[{"type":"value","value":"2016-04-15T16:59:06.000-07:00","grain":"second"}]}]}}]}
             console.log( JSON.stringify(data) );
 
-            var entities = data.outcomes.entities;
+            var entities = false;
+            if( data.outcomes && data.outcomes.intent && data.outcomes.intent.entities ){
+              entities = data.outcomes.intent.entities;
+            }
+
             if( entities ){
-              var intent = entities.intent.value;
+              var intent = 'dont know';
+              if( entities.intent && entities.intent.value ){
+                intent = entities.intent.value;
+              }
               switch( intent ){
                 case 'drugs':
                 sendTextMessage( sender, `Only cat nap for me bro.` );
                 break;
 
-                case 'coffee':
-                sendTextMessage( sender, `Ewwww, cats, hate ${intent}.` );
-                break;
+              case 'coffee':
+              sendTextMessage( sender, `Ewwww, cats, hate ${intent}.` );
+              break;
+
+              case 'datetime':
+              sendTextMessage( sender, `nap time.` );
+              break;
 
                 default:
                 sendTextMessage( sender, `ok... ${intent}. ` );
