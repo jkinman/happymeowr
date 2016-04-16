@@ -70,9 +70,8 @@ exports.dealWithMessage = (req, res) => {
               sendTextMessage( sender, `nap time.` );
               break;
 
-                default:
+              default:
                 sendTextMessage( sender, `ok... ${intent}. ` );
-                break;
                 yelp.search({
                   term: intent,
                   location: 'Vancouver canada',
@@ -87,6 +86,7 @@ exports.dealWithMessage = (req, res) => {
                   var venueName = `${randBusiness.name} ${randBusiness.rating} stars`;
                   sendTextMessage( sender, venueName );
                 });
+                break;
               }
             }
             else{
