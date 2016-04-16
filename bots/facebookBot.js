@@ -42,7 +42,7 @@ exports.dealWithMessage = (req, res) => {
             console.log( JSON.stringify(data) );
 
             var entities = false;
-            if( data.outcomes && data.outcomes[0].intent && data.outcomes.intent.entities ){
+            if( data.outcomes && data.outcomes[0].intent && data.outcomes[0].intent.entities ){
               entities = data.outcomes.intent.entities;
             }
             console.log( entities );
