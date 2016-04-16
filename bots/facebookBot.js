@@ -39,10 +39,15 @@ exports.dealWithMessage = (req, res) => {
   //   {"_text":"Hi cat. Looking for a patio.","confidence":null,"intent":"default_intent",
   //   "entities":{"greeting":[{"type":"value","value":"neutral"}],"me":[{"type":"value","value":"neutral"}],"intent":[{"type":"value","value":"patio"}]}}]}
 
+
+// {"msg_id":"a3d15d46-cc6f-4234-ba58-e036cab0fd2d","_text":"Hey cat. Tell me where patio?",
+// "outcomes":[{"_text":"Hey cat. Tell me where patio?","confidence":null,"intent":"default_intent",
+// "entities":{"me":[{"type":"value","value":"neutral"}],"intent":[{"type":"value","value":"patio"}]}}]}
+
             console.log( JSON.stringify(data) );
 
             var entities = false;
-            if( data.outcomes && data.outcomes[0].intent && data.outcomes[0].intent.entities ){
+            if( data.outcomes && data.outcomes[0].intent && data.outcomes[0].intent.value ){
               entities = data.outcomes.intent.entities;
             }
             console.log( entities );
