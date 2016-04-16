@@ -32,23 +32,26 @@ exports.dealWithMessage = (req, res) => {
           if (error) {
             console.log('Oops! Got an error: ' + error);
           } else {
-// {
-//   "msg_id":"ac38d298-e19d-49ea-86d2-ab3ca9a6fca4",
-//   "_text":"How about now?",
-//   "outcomes":[{"_text":"How about now?","confidence":null,
-//   "intent":"default_intent","entities":{"datetime":[{"type":"value","value":"2016-04-15T16:59:06.000-07:00","grain":"second","values":[{"type":"value","value":"2016-04-15T16:59:06.000-07:00","grain":"second"}]}]}}]}
+
+{
+  // "msg_id":"d8315911-0ba4-4c61-90fc-95aa34f645f3","_text":"Hi cat. Looking for a patio.",
+  // "outcomes":[
+  //   {"_text":"Hi cat. Looking for a patio.","confidence":null,"intent":"default_intent",
+  //   "entities":{"greeting":[{"type":"value","value":"neutral"}],"me":[{"type":"value","value":"neutral"}],"intent":[{"type":"value","value":"patio"}]}}]}
+
             console.log( JSON.stringify(data) );
 
             var entities = false;
-            if( data.outcomes && data.outcomes.intent && data.outcomes.intent.entities ){
+            if( data.outcomes && data.outcomes[0].intent && data.outcomes.intent.entities ){
               entities = data.outcomes.intent.entities;
             }
-
+            console.log( entities );
             if( entities ){
               var intent = 'dont know';
               if( entities.intent && entities.intent.value ){
                 intent = entities.intent.value;
               }
+              console.log( intent );
               switch( intent ){
                 case 'drugs':
                 sendTextMessage( sender, `Only cat nap for me bro.` );
