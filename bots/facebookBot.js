@@ -48,7 +48,7 @@ exports.dealWithMessage = (req, res) => {
 
             var entities = false;
             if( data.outcomes && data.outcomes[0].entities && data.outcomes[0].entities.intent ){
-              entities = data.outcomes[0].entities.intent.value;
+              entities = data.outcomes[0].entities.intent[0].value;
             }
             console.log( entities );
             if( entities ){
