@@ -47,14 +47,14 @@ exports.dealWithMessage = (req, res) => {
             console.log( JSON.stringify(data) );
 
             var entities = false;
-            if( data.outcomes && data.outcomes[0].entities && data.outcomes[0].entities.intent ){
-              entities = data.outcomes[0].entities.intent[0].value;
+            if( data.outcomes && data.outcomes[0].entities && data.outcomes[0].entities ){
+              entities = data.outcomes[0].entities;
             }
             console.log( entities );
             if( entities ){
               var intent = 'dont know';
-              if( entities.intent && entities.intent.value ){
-                intent = entities.intent.value;
+              if( entities.intent && entities.intent[0].value ){
+                intent = entities.intent[0].value;
               }
               console.log( intent );
               switch( intent ){
