@@ -33,7 +33,7 @@ exports.dealWithMessage = (req, res) => {
             console.log('Oops! Got an error: ' + error);
           } else {
 
-{
+// {
   // "msg_id":"d8315911-0ba4-4c61-90fc-95aa34f645f3","_text":"Hi cat. Looking for a patio.",
   // "outcomes":[
   //   {"_text":"Hi cat. Looking for a patio.","confidence":null,"intent":"default_intent",
