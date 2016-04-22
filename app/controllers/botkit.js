@@ -8,7 +8,7 @@ var options = {
   url: 'https://aiaas.pandorabots.com',
   app_id: '1409612563876',
   user_key: 'ce44b4cc05327d8ef97ec704c05729ef',
-  botname: 'Happymeowr'
+  botname: 'happymeowr'
 };
 
 var pandoraBot = new Pandorabot(options);
@@ -132,9 +132,9 @@ controller.on('direct_message,mention,direct_mention',function(bot,message) {
     }
     console.log( message );
 
-    pandoraBot.atalk( {input: message.text}, function (err, res) {
+    pandoraBot.talk( {input: message.text}, function (err, res) {
       if (!err) console.log(res);
-      bot.reply( message, res );
+      bot.reply( message, res.responses[0] );
     });
   });
 });
