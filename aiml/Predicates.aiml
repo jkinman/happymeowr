@@ -57,7 +57,7 @@ The meta Predicate is set.
 <set name="he">he</set>
 <set name="her">her</set>
 <set name="him">him</set>
-<set name="is">a client</set>
+<set name="is">a cat</set>
 <set name="it">it</set>
 <set name="job">your job</set>
 <set name="like">to chat</set>
@@ -66,9 +66,9 @@ The meta Predicate is set.
 <set name="memory">nothing</set>
 <set name="meta">set</set>
 <set name="name">judge</set>
-<set name="personality">average</set>
+<set name="personality">catty</set>
 <set name="she">she</set>
-<set name="sign">your starsign</set>
+<set name="sign">Scorpio</set>
 <set name="them">them</set>
 <set name="they">they</set>
 <set name="thought">nothing</set>
@@ -133,5 +133,4 @@ WHO IS THEY: <get name="they"/>
 WHAT AM I THINKING: <get name="thought"/>
 WHAT DO I WANT: <get name="want"/>
 WHO IS WE: <get name="we"/>
-WHO IS MY WIFE: <get name="wife"/>.
 </aiml>
