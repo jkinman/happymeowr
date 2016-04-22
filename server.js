@@ -4,6 +4,9 @@ var app            = express();
 var bodyParser     = require('body-parser');
 var http           = require('http').Server(app);
 var dotenv         = require('dotenv');
+var path           = require('path');
+var favicon        = require('serve-favicon');
+var logger         = require('morgan');
 
 // configuration ===========================================
 
@@ -18,6 +21,8 @@ app.use(express.static(__dirname + '/public'))
 //parsing
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); //for parsing url encoded
+
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
 // view engine ejs
 app.set('view engine', 'ejs');
@@ -35,4 +40,3 @@ require('./app/controllers/botkit')
 http.listen(app.get('port'), function(){
   console.log('listening on port ' + app.get('port'));
 });
-
