@@ -2,6 +2,17 @@
 
 /* Uses the slack button feature to offer a real time bot to multiple teams */
 var Botkit = require('botkit');
+var Pandorabot = require('pb-node');
+
+var options = {
+  url: 'https://aiaas.pandorabots.com',
+  app_id: '1409612563876',
+  user_key: 'ce44b4cc05327d8ef97ec704c05729ef',
+  botname: 'Happymeowr'
+};
+
+var pandoraBot = new Pandorabot(options);
+
 var mongoUri = process.env.MONGOLAB_URI || 'mongodb://localhost/botkit_express_demo'
 var botkit_mongo_storage = require('../../config/botkit_mongo_storage')({mongoUri: mongoUri})
 
@@ -86,7 +97,22 @@ controller.on('rtm_close',function(bot) {
 //DIALOG ======================================================================
 
 controller.hears('hello','direct_message',function(bot,message) {
-  bot.reply(message,'Hello!');
+
+  pandoraBot.list(function(err, res) {
+   if (!err) console.log(res);
+  });
+
+  // var talkParams = {
+  //   input: message.text,
+  // }
+  //
+  // pandoraBot.talk(talkParams, function (err, res) {
+  //   console.log( err );
+  //   console.log( res );
+  //   // if (!err) console.log(res);
+  //   bot.reply(message, res );
+  // });
+
 });
 
 controller.hears('^stop','direct_message',function(bot,message) {
@@ -98,10 +124,18 @@ controller.on('direct_message,mention,direct_mention',function(bot,message) {
   bot.api.reactions.add({
     timestamp: message.ts,
     channel: message.channel,
-    name: 'robot_face',
+    name: 'smiley_cat',
   },function(err) {
     if (err) { console.log(err) }
-    bot.reply(message,'I heard you loud and clear boss.');
+    var talkParams = {
+      input: message.text,
+    }
+    console.log( message );
+
+    pandoraBot.atalk( {input: message.text}, function (err, res) {
+      if (!err) console.log(res);
+      bot.reply( message, res );
+    });
   });
 });
 
