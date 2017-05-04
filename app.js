@@ -6,6 +6,11 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var Botkit = require('botkit');
 var os = require('os');
+var RecastaiMiddleware = require('botkit-middleware-recastai')({
+        request_token: 'f12ee8129c52582430a48963dc911bb4',
+        confidence: 0.4
+});
+
 
 // routes
 var routes = require('./routes/index');
@@ -30,6 +35,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 // app.use('/users', users);
 app.use('/bots', bots);
+controller.middleware.receive.use(RecastaiMiddleware.receive);
 
 console.log( `loaded routes` );
 
